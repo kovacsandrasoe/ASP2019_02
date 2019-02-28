@@ -27,11 +27,19 @@ namespace StudentCrud.Data
 
         public void DeleteStudentById(string id)
         {
+            var student = students.Where(t => t.NeptunCode == id).First();
+
+
             students.RemoveAll(t => t.NeptunCode == id);
 
             //Student actual = students.Where(t => t.NeptunCode == id)
             //    .FirstOrDefault();
             //students.Remove(actual);
+        }
+
+        public Student GetStudentById(string id)
+        {
+            return students.Where(t => t.UID == id).FirstOrDefault();
         }
     }
 }

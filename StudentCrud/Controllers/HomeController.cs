@@ -45,5 +45,45 @@ namespace StudentCrud.Controllers
             repo.DeleteStudentById(id);
             return RedirectToAction("GetAll");
         }
+
+        public IActionResult Print(string id)
+        {
+            var stud = repo.GetStudentById(id);
+            return View(stud);
+        }
+
+        public IActionResult Modify(string id)
+        {
+            var student = repo.GetStudentById(id);
+
+            ViewData["headertext"] = "Modify data for: " + student.Name;
+
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult Modify(Student newstudent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newstudent);
+            }
+
+            try
+            {
+                repo.DeleteStudentById(newstudent.NeptunCode);
+                repo.AddStudent(newstudent);
+            }
+            catch(Exception e)
+            {
+                //saját hibakóddal visszatérés
+                return StatusCode(777);
+            }
+            
+            
+            return RedirectToAction("GetAll");
+        }
+
+
     }
 }

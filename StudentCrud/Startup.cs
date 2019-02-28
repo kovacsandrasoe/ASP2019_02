@@ -28,7 +28,9 @@ namespace StudentCrud
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.UseStatusCodePagesWithReExecute("/Error/StatusPage", "?code={0}");
             app.UseMvcWithDefaultRoute();
+            
         }
     }
 }
